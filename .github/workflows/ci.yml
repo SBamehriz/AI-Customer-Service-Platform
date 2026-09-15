@@ -1,0 +1,147 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# A superseded run on the same branch has nothing useful left to say.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Tests
+        run: npm test
+      - name: Build app and widget
+        run: npm run build
+      - name: Check the bundle is real
+        # A build of one module means the entry resolved to nothing.
+        run: |
+          test -f dist/index.html
+          test -f dist/widget.js
+          test "$(find dist/assets -name '*.js' | wc -l)" -gt 5
+
+  backend:
+    name: Backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install
+        working-directory: backend
+        run: pip install -r requirements-dev.txt
+      - name: Lint
+        working-directory: backend
+        run: ruff check .
+      - name: Tests
+        # In memory SQLite, no LLM provider, no services required.
+        working-directory: backend
+        run: pytest -q
+      - name: App imports and serves /health
+        working-directory: backend
+        run: |
+          python -c "
+          import asyncio, os
+          os.environ['DATABASE_URL'] = 'sqlite+aiosqlite:///:memory:'
+          from httpx import ASGITransport, AsyncClient
+          from app.db import init_db
+          from app.main import app
+
+          async def main():
+              # ASGITransport skips the lifespan, so create the tables here.
+              await init_db()
+              transport = ASGITransport(app=app)
+              async with AsyncClient(transport=transport, base_url='http://t') as client:
+                  response = await client.get('/health')
+                  assert response.status_code == 200, response.text
+                  body = response.json()
+                  assert body['status'] == 'ok', body
+                  assert body['databaseReady'] is True, body
+                  print(body)
+          asyncio.run(main())
+          "
+
+  postgres:
+    name: Backend on PostgreSQL
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: ucsp
+          POSTGRES_PASSWORD: ucsp
+          POSTGRES_DB: ucsp
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - name: Install
+        working-directory: backend
+        run: |
+          pip install -r requirements-dev.txt
+          pip install asyncpg
+      - name: Tests
+        # The same suite as the SQLite job. The schema is deliberately portable,
+        # so this is what keeps that true rather than merely claimed.
+        working-directory: backend
+        env:
+          DATABASE_URL: postgresql+asyncpg://ucsp:ucsp@localhost:5432/ucsp
+        run: pytest -q
+
+  docker:
+    name: Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: docker build -t ucsp:ci .
+      - name: The container starts and serves
+        run: |
+          docker run -d --name ucsp \
+            -e SECRET_KEY=ci-only-not-a-real-secret \
+            -e SEED_DEMO_DATA=true \
+            -p 8000:8000 ucsp:ci
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://localhost:8000/health > /tmp/health.json; then
+              break
+            fi
+            sleep 2
+          done
+          cat /tmp/health.json
+          grep -q '"status":"ok"' /tmp/health.json
+          curl -fsS -o /dev/null http://localhost:8000/
+          curl -fsS -o /dev/null http://localhost:8000/widget.js
+      - name: It does not run as root
+        run: test "$(docker exec ucsp id -u)" != "0"
+      - name: It can talk to PostgreSQL
+        # The image carries asyncpg so that pointing DATABASE_URL at a server is
+        # the only thing anyone has to do to it.
+        run: docker exec ucsp python -c "import asyncpg"
+      - name: Logs on failure
+        if: failure()
+        run: docker logs ucsp

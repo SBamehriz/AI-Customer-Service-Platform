@@ -1,0 +1,401 @@
+/*
+ * Design tokens.
+ *
+ * Two layers. The first is a fixed palette of raw ramps that never change. The
+ * second is a set of semantic roles, meaning surface, text, border and accent,
+ * which point at the palette and are repointed in dark mode. Components only
+ * ever use the semantic layer, so the whole product rethemes from thirty lines.
+ *
+ * Typography is the native system stack. SF on Apple platforms, Segoe on
+ * Windows, Inter or Cantarell on Linux. There is no webfont request, nothing
+ * to self host, and text looks native wherever it renders.
+ */
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------------
+ * Layer 1, the palette
+ * ------------------------------------------------------------------------- */
+
+:root {
+  /* Neutrals, very slightly cool, so they sit under blue without muddying. */
+  --n-0:  #ffffff;
+  --n-25: #fcfcfd;
+  --n-50: #f7f8f9;
+  --n-100:#f1f2f4;
+  --n-150:#e8eaed;
+  --n-200:#dfe1e6;
+  --n-300:#c7cad1;
+  --n-400:#a2a7b1;
+  --n-500:#787e8a;
+  --n-600:#5b616d;
+  --n-700:#434852;
+  --n-800:#2d313a;
+  --n-850:#212530;
+  --n-900:#181b23;
+  --n-950:#0f1116;
+  --n-1000:#08090c;
+
+  /* Accent, one blue in nine steps. Step 500 is the interactive default. */
+  --a-50:  #eef4ff;
+  --a-100: #dbe7fe;
+  --a-200: #bfd4fe;
+  --a-300: #93b8fd;
+  --a-400: #6094fa;
+  --a-500: #2f6ff0;
+  --a-600: #1d55dd;
+  --a-700: #1a43b3;
+  --a-800: #1b3a8e;
+  --a-900: #1b3470;
+
+  /* Status hues, light and dark variants each. */
+  --green-500: #17915f;  --green-400: #35c58a;  --green-50: #e8f7f0;
+  --amber-500: #b4750d;  --amber-400: #e9a33a;  --amber-50: #fdf4e3;
+  --red-500:   #d0342c;  --red-400:   #f4726a;  --red-50:   #fdeceb;
+  --violet-500:#6d4bd8;  --violet-400:#a48af0;  --violet-50:#f0ecfd;
+}
+
+/* ---------------------------------------------------------------------------
+ * Layer 2, the semantic roles, in light mode
+ * ------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  --bg:            var(--n-50);
+  --surface:       var(--n-0);
+  --surface-sunken:var(--n-100);
+  --surface-hover: var(--n-50);
+  --surface-active:var(--n-100);
+  /* Translucent chrome for bars that sit over scrolling content. */
+  --surface-veil:  rgb(255 255 255 / 0.72);
+
+  --text:          var(--n-900);
+  --text-secondary:var(--n-600);
+  --text-muted:    var(--n-500);
+  --text-inverse:  var(--n-0);
+
+  --border:        var(--n-200);
+  --border-strong: var(--n-300);
+  --border-subtle: var(--n-150);
+
+  --accent:        var(--a-500);
+  --accent-hover:  var(--a-600);
+  --accent-soft:   var(--a-50);
+  --accent-border: var(--a-200);
+  --accent-text:   var(--a-700);
+
+  --success: var(--green-500); --success-soft: var(--green-50);
+  --warning: var(--amber-500); --warning-soft: var(--amber-50);
+  --danger:  var(--red-500);   --danger-soft:  var(--red-50);
+  --info:    var(--violet-500);--info-soft:    var(--violet-50);
+
+  --shadow-color: 220 12% 12%;
+}
+
+/* Dark mode is the same roles, repointed. Nothing else in the app changes. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg:            var(--n-1000);
+    --surface:       var(--n-950);
+    --surface-sunken:var(--n-900);
+    --surface-hover: var(--n-900);
+    --surface-active:var(--n-850);
+    --surface-veil:  rgb(15 17 22 / 0.72);
+
+    --text:          #f2f4f7;
+    --text-secondary:var(--n-400);
+    --text-muted:    var(--n-500);
+    --text-inverse:  var(--n-950);
+
+    --border:        #262a33;
+    --border-strong: #363b46;
+    --border-subtle: #1e222a;
+
+    --accent:        var(--a-400);
+    --accent-hover:  var(--a-300);
+    --accent-soft:   rgb(96 148 250 / 0.14);
+    --accent-border: rgb(96 148 250 / 0.32);
+    --accent-text:   var(--a-300);
+
+    --success: var(--green-400); --success-soft: rgb(53 197 138 / 0.14);
+    --warning: var(--amber-400); --warning-soft: rgb(233 163 58 / 0.14);
+    --danger:  var(--red-400);   --danger-soft:  rgb(244 114 106 / 0.14);
+    --info:    var(--violet-400);--info-soft:    rgb(164 138 240 / 0.14);
+
+    --shadow-color: 220 40% 2%;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:            var(--n-1000);
+  --surface:       var(--n-950);
+  --surface-sunken:var(--n-900);
+  --surface-hover: var(--n-900);
+  --surface-active:var(--n-850);
+  --surface-veil:  rgb(15 17 22 / 0.72);
+
+  --text:          #f2f4f7;
+  --text-secondary:var(--n-400);
+  --text-muted:    var(--n-500);
+  --text-inverse:  var(--n-950);
+
+  --border:        #262a33;
+  --border-strong: #363b46;
+  --border-subtle: #1e222a;
+
+  --accent:        var(--a-400);
+  --accent-hover:  var(--a-300);
+  --accent-soft:   rgb(96 148 250 / 0.14);
+  --accent-border: rgb(96 148 250 / 0.32);
+  --accent-text:   var(--a-300);
+
+  --success: var(--green-400); --success-soft: rgb(53 197 138 / 0.14);
+  --warning: var(--amber-400); --warning-soft: rgb(233 163 58 / 0.14);
+  --danger:  var(--red-400);   --danger-soft:  rgb(244 114 106 / 0.14);
+  --info:    var(--violet-400);--info-soft:    rgb(164 138 240 / 0.14);
+
+  --shadow-color: 220 40% 2%;
+}
+
+/* ---------------------------------------------------------------------------
+ * The Tailwind theme uses inline, so utilities emit var references and follow
+ * the runtime theme instead of baking in light mode values.
+ * ------------------------------------------------------------------------- */
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--surface-sunken);
+  --color-hover: var(--surface-hover);
+  --color-active: var(--surface-active);
+  --color-veil: var(--surface-veil);
+
+  --color-ink: var(--text);
+  --color-ink-secondary: var(--text-secondary);
+  --color-ink-muted: var(--text-muted);
+  --color-ink-inverse: var(--text-inverse);
+
+  --color-line: var(--border);
+  --color-line-strong: var(--border-strong);
+  --color-line-subtle: var(--border-subtle);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-border: var(--accent-border);
+  --color-accent-text: var(--accent-text);
+
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI Variable Text",
+    "Segoe UI", Inter, Roboto, Cantarell, "Helvetica Neue", Arial, sans-serif;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, "JetBrains Mono", "Cascadia Mono",
+    Menlo, Consolas, monospace;
+
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 38px;
+  --text-5xl: 48px;
+  --text-6xl: 60px;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 22px;
+
+  /* Layered shadows, a tight contact shadow plus a wide soft one, which is
+   * what makes a raised surface read as physically lifted. */
+  --shadow-xs: 0 1px 2px hsl(var(--shadow-color) / 0.06);
+  --shadow-sm: 0 1px 2px hsl(var(--shadow-color) / 0.06), 0 1px 3px hsl(var(--shadow-color) / 0.05);
+  --shadow-md: 0 2px 4px hsl(var(--shadow-color) / 0.05), 0 6px 16px -4px hsl(var(--shadow-color) / 0.10);
+  --shadow-lg: 0 4px 8px hsl(var(--shadow-color) / 0.05), 0 16px 32px -8px hsl(var(--shadow-color) / 0.14);
+  --shadow-xl: 0 8px 16px hsl(var(--shadow-color) / 0.06), 0 32px 64px -16px hsl(var(--shadow-color) / 0.22);
+
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---------------------------------------------------------------------------
+ * Base
+ *
+ * These have to live in the base layer. Unlayered rules outrank every layered
+ * one, so an element selector outside a layer silently beats the Tailwind
+ * utilities. A wrap rule on p would defeat truncate, and the focus radius would
+ * defeat a fully rounded button.
+ * ------------------------------------------------------------------------- */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+  }
+
+  #root {
+    min-height: 100dvh;
+    isolation: isolate;
+  }
+
+  /* Optical tightening, because large text needs negative tracking to look right. */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: -0.014em;
+    text-wrap: balance;
+  }
+  h1 { letter-spacing: -0.028em; }
+  h2 { letter-spacing: -0.022em; }
+
+  p { margin: 0; text-wrap: pretty; }
+
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* One focus treatment everywhere, a soft ring plus a crisp inner edge. */
+  :focus { outline: none; }
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px var(--surface),
+      0 0 0 4px color-mix(in srgb, var(--accent) 55%, transparent);
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+ * Scrollbars, present but quiet, and only on hover.
+ * ------------------------------------------------------------------------- */
+
+.scroll-slim {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 200ms;
+}
+.scroll-slim:hover { scrollbar-color: var(--border-strong) transparent; }
+.scroll-slim::-webkit-scrollbar { width: 10px; height: 10px; }
+.scroll-slim::-webkit-scrollbar-track { background: transparent; }
+.scroll-slim::-webkit-scrollbar-thumb {
+  background: transparent;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+.scroll-slim:hover::-webkit-scrollbar-thumb { background: var(--border-strong); background-clip: padding-box; }
+
+/* ---------------------------------------------------------------------------
+ * Utilities
+ * ------------------------------------------------------------------------- */
+
+/* Frosted chrome for sticky headers and the command palette. */
+.veil {
+  background: var(--surface-veil);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+.hairline { border: 1px solid var(--border); }
+
+/* Faint dot field for the marketing hero. */
+.dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.numeric { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+.animate-fade-up { animation: fade-up 320ms var(--ease-out) both; }
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 color-mix(in srgb, var(--danger) 45%, transparent); }
+  70%  { box-shadow: 0 0 0 8px transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.animate-pulse-ring { animation: pulse-ring 2s var(--ease-out) infinite; }
+
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-sunken);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--surface) 60%, transparent),
+    transparent
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

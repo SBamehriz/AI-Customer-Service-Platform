@@ -1,0 +1,28 @@
+# The image installs its own dependencies and builds the frontend itself, so
+# nothing local needs to be sent to the daemon. Without this the build context
+# also carries backend/data, which is your database and your customers' files.
+
+node_modules
+dist
+.git
+.github
+
+backend/data
+backend/.venv
+.venv
+venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.mypy_cache
+*.egg-info
+
+.env
+.env.*
+!.env.example
+
+docs/screenshots
+*.log
+.DS_Store
+.vscode
+.idea

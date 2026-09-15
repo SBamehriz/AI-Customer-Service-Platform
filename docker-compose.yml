@@ -1,0 +1,41 @@
+# Unified Customer Service Platform
+#
+# One service. SQLite in a named volume, with no database container, no cache
+# and no vector store. Run docker compose up --build and open localhost:8000.
+
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      # Generate one with openssl rand -hex 32
+      SECRET_KEY: ${SECRET_KEY:?set SECRET_KEY in .env before starting}
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8000}
+      # SQLite in the volume below by default. To use PostgreSQL instead, set
+      # DATABASE_URL to your server and nothing else changes.
+      DATABASE_URL: ${DATABASE_URL:-sqlite+aiosqlite:////app/backend/data/ucsp.db}
+      # Set true only to look around. The demo accounts share a password
+      # that is published in the README.
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-false}
+      DEBUG: ${DEBUG:-false}
+      # Set this to your proxy address if you put one in front of this service,
+      # otherwise every visitor shares one apparent address.
+      FORWARDED_ALLOW_IPS: ${FORWARDED_ALLOW_IPS:-127.0.0.1}
+      # An AI provider is optional, the app runs fine without one.
+      LLM_PROVIDER: ${LLM_PROVIDER:-none}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-}
+    volumes:
+      - data:/app/backend/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  data:

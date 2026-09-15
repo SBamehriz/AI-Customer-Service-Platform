@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/SBamehriz/AI-Customer-Service-Platform/security/advisories/new
+    about: Please report anything sensitive privately rather than in an issue.

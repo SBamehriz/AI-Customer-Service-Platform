@@ -1,0 +1,42 @@
+line-length = 100
+target-version = "py311"
+
+[lint]
+select = [
+  "E",    # pycodestyle
+  "F",    # pyflakes
+  "I",    # import order
+  "B",    # likely bugs
+  "BLE",  # blind except, which every one here has to justify with a noqa
+  "UP",   # outdated syntax
+  "SIM",  # needless complexity
+  "C4",   # comprehensions
+  "RUF",  # ruff's own checks, including unused noqa
+]
+ignore = [
+  # Line length is a formatting matter and the code already wraps at 100.
+  "E501",
+  # Optional[X] is used consistently throughout and reads clearly next to the
+  # SQLAlchemy and Pydantic annotations around it. Mixing it with X | None
+  # would be the worse outcome.
+  "UP045",
+  "UP007",
+  # Suggests a ternary where the block form is carrying a comment and reads
+  # better across two branches.
+  "SIM108",
+  # Would flatten the stopword list into one unreadable line.
+  "SIM905",
+]
+
+[lint.flake8-bugbear]
+# FastAPI declares dependencies and form fields as argument defaults. That is
+# the framework's own idiom, not the mutable default argument bug.
+extend-immutable-calls = [
+  "fastapi.Depends",
+  "fastapi.File",
+  "fastapi.Form",
+  "fastapi.Query",
+  "fastapi.Header",
+  "fastapi.Path",
+  "fastapi.Body",
+]

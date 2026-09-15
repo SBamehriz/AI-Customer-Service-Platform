@@ -1,0 +1,454 @@
+{
+  "$comment": "Demo dataset for the sample workspace. Read by backend/app/seed.py and by the frontend demo mode in src/lib/demo, so the hosted demo and a freshly seeded self hosted install tell the same story. Times are relative offsets, materialised at load.",
+  "workspace": {
+    "name": "Meridian Outfitters",
+    "slug": "meridian-outfitters",
+    "accentColor": "#2563EB",
+    "settings": {
+      "greeting": "Hi, we are here to help with orders, returns and gear questions.",
+      "brandVoice": "Warm, plain spoken and specific. Outdoor people talking to outdoor people. Never guess at a policy.",
+      "fallbackMessage": "I want to get this exactly right, so let me bring in a teammate.",
+      "instructions": "Always give the actual policy window in days. If an order is involved, ask for the order number before promising anything.",
+      "aiAutoreply": true,
+      "aiSuggestThreshold": 0.3,
+      "aiAutoresolveThreshold": 0.9,
+      "escalateAfterAiTurns": 4,
+      "businessHours": "Monday to Friday, 8am to 6pm MT"
+    }
+  },
+  "users": [
+    { "key": "owner", "name": "Dana Whitfield", "email": "dana@meridian.example", "role": "owner", "password": "demo1234" },
+    { "key": "sup", "name": "Priya Raman", "email": "priya@meridian.example", "role": "supervisor", "password": "demo1234" },
+    { "key": "agent1", "name": "Marcus Oyelaran", "email": "marcus@meridian.example", "role": "agent", "password": "demo1234" },
+    { "key": "agent2", "name": "Sofia Institoris", "email": "sofia@meridian.example", "role": "agent", "password": "demo1234" },
+    { "key": "agent3", "name": "Tomas Lindqvist", "email": "tomas@meridian.example", "role": "agent", "password": "demo1234" }
+  ],
+  "customers": [
+    { "key": "c1", "name": "Elena Farrow", "email": "elena.farrow@example.com", "phone": "+15550142", "company": "Farrow Guiding", "channelIds": { "email": "elena.farrow@example.com", "whatsapp": "15550142" } },
+    { "key": "c2", "name": "Ravi Chandrasekaran", "email": "ravi.c@example.com", "phone": "+15550188", "company": "", "channelIds": { "whatsapp": "15550188" } },
+    { "key": "c3", "name": "Nadia Osei", "email": "nadia.osei@example.com", "phone": "+15550171", "company": "Highline Adventure Co.", "channelIds": { "email": "nadia.osei@example.com", "instagram": "1784100234" } },
+    { "key": "c4", "name": "Ben Lindqvist", "email": "ben.l@example.com", "phone": "+15550119", "company": "", "channelIds": { "sms": "+15550119" } },
+    { "key": "c5", "name": "Maria Delgado", "email": "maria.delgado@example.com", "phone": "+15550166", "company": "Delgado Outdoor School", "channelIds": { "email": "maria.delgado@example.com" } },
+    { "key": "c6", "name": "Tomasz Wojcik", "email": "t.wojcik@example.com", "phone": "+15550153", "company": "", "channelIds": { "web": "web_demo_tw" } },
+    { "key": "c7", "name": "Aisha Rahman", "email": "aisha.rahman@example.com", "phone": "+15550197", "company": "Summit Rentals", "channelIds": { "whatsapp": "15550197", "email": "aisha.rahman@example.com" } },
+    { "key": "c8", "name": "Grant Mullins", "email": "grant.m@example.com", "phone": "+15550124", "company": "", "channelIds": { "instagram": "1784100987" } },
+    { "key": "c9", "name": "Yuki Tanaka", "email": "yuki.tanaka@example.com", "phone": "+15550135", "company": "", "channelIds": { "email": "yuki.tanaka@example.com" } },
+    { "key": "c10", "name": "Camille Boucher", "email": "camille.b@example.com", "phone": "+15550149", "company": "Boucher Expeditions", "channelIds": { "voice": "+15550149", "email": "camille.b@example.com" } },
+    { "key": "c11", "name": "Owen Pritchard", "email": "owen.p@example.com", "phone": "+15550158", "company": "", "channelIds": { "web": "web_demo_op" } },
+    { "key": "c12", "name": "Hana Novak", "email": "hana.novak@example.com", "phone": "+15550163", "company": "Novak Ski Hire", "channelIds": { "email": "hana.novak@example.com", "sms": "+15550163" } }
+  ],
+  "articles": [
+    {
+      "key": "returns",
+      "title": "Returns and exchanges",
+      "category": "Orders",
+      "status": "published",
+      "visibility": "public",
+      "summary": "60 days to send anything back unused, 12 months on manufacturing defects.",
+      "tags": ["returns", "refund", "exchange", "send it back"],
+      "body": "How long do you have. You can send anything back unused, in its original packaging, within 60 days of delivery for a full refund to the original payment method. Refunds are issued within 5 business days of the item reaching our warehouse.\n\nWorn or used gear can be exchanged for a different size or colour, or swapped for store credit, within the same 60 days, as long as it is clean and undamaged.\n\nManufacturing defects are covered for 12 months from the delivery date, however much it has been used. Send photos of the defect and we will arrange a replacement or a full refund, with no return shipping cost to you.\n\nStart a return from the order confirmation email or from your account, and we email you a prepaid label to print. Drop the parcel at any carrier point.\n\nGift cards, used climbing hardware and anything cut to length cannot be sent back."
+    },
+    {
+      "key": "shipping",
+      "title": "Shipping times and costs",
+      "category": "Orders",
+      "status": "published",
+      "visibility": "public",
+      "summary": "What delivery costs and how long it takes. Free ground over 75 dollars, standard 3 to 5 business days, express 2 days.",
+      "tags": ["shipping", "delivery", "cost", "how long"],
+      "body": "What delivery costs. Standard ground shipping is free on orders over 75 dollars, and 6.95 dollars below that. It arrives in 3 to 5 business days within the continental US.\n\nExpress delivery costs 18.95 dollars and arrives in 2 business days when the order is placed before 1pm MT.\n\nOrders placed after 1pm MT ship the next business day. We do not ship on weekends or public holidays.\n\nWhere we deliver. Anywhere in the continental US, and internationally to Canada and the EU. Remote and mountain addresses, the highlands and the islands included, can take two days longer than the estimate shown at checkout. Duties and import taxes are the responsibility of the customer and are not collected at checkout."
+    },
+    {
+      "key": "tracking",
+      "title": "Where is my order",
+      "category": "Orders",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Where your parcel is, why tracking can look stuck, and what happens when it has not turned up.",
+      "tags": ["tracking", "delivery", "delay", "where is my order", "late"],
+      "body": "Where is my order. A tracking number is emailed the moment your parcel leaves our warehouse, so check that email first. Carrier scans can take up to 24 hours to appear, so a tracking page showing no movement on the first day is normal.\n\nIf tracking has not updated for 3 business days, the parcel counts as delayed and we will send a replacement at no cost while the carrier investigates.\n\nIf tracking shows delivered but nothing arrived, or your parcel has not turned up by the date we gave you, check with neighbours and the building office first, then contact us within 7 days. We will replace or refund the order once a carrier claim is opened."
+    },
+    {
+      "key": "warranty",
+      "title": "Gear warranty",
+      "category": "Product",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Lifetime on packs and tents, 2 years on insulation, 12 months on electronics.",
+      "tags": ["warranty", "repair", "defect"],
+      "body": "Packs and tents carry a lifetime warranty against manufacturing defects for the original owner. Zips, buckles and pole sections are repaired free. If a repair is not possible we replace the item with the current equivalent model.\n\nInsulated jackets and sleeping bags are covered for 2 years against down leaking, baffle failure and seams coming apart.\n\nHeadlamps, GPS units and other electronics carry a 12 month warranty.\n\nNormal wear, sun damage, damage from poor storage and animal damage are not covered. Send photos and the order number to open a warranty claim."
+    },
+    {
+      "key": "sizing",
+      "title": "Boot and pack sizing",
+      "category": "Product",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Size boots half up from street shoes. Packs are sized by torso length.",
+      "tags": ["sizing", "fit", "boots", "packs"],
+      "body": "Hiking boots should be ordered a half size above your street shoe, to leave room for thick socks and for your toes to move on the way downhill. If you are between sizes, size up.\n\nBackpacks are sized by torso length rather than height. Measure from the bump at the base of your neck to the top of your hip bones. Under 16 inches is Small, 16 to 19 inches is Medium, over 19 inches is Large.\n\nFit exchanges are free both ways within 60 days, including on used gear, as long as it is clean."
+    },
+    {
+      "key": "price-match",
+      "title": "Price matching",
+      "category": "Orders",
+      "status": "published",
+      "visibility": "public",
+      "summary": "We match a cheaper price at an authorised retailer within 14 days.",
+      "tags": ["price", "discount", "match", "cheaper", "lower price"],
+      "body": "Found it cheaper somewhere else. We match the advertised price of any authorised retailer on an identical item that is in stock, including for 14 days after your purchase, where we refund you the difference.\n\nWe do not match marketplace sellers, auction listings, membership only pricing, clearance or bundle pricing, or prices that depend on a coupon we cannot verify.\n\nSend a link to the cheaper listing along with your order number and we will check it the same day."
+    },
+    {
+      "key": "damaged",
+      "title": "Item arrived damaged",
+      "category": "Orders",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Send photos within 7 days. The replacement ships immediately.",
+      "tags": ["damaged", "broken", "replacement"],
+      "body": "If an item arrives damaged, send photos of the item and the shipping box within 7 days of delivery.\n\nWe ship the replacement immediately, so you do not have to return the damaged item first. A prepaid return label is included in the replacement box.\n\nIf the item is out of stock we refund in full the same day, rather than making you wait."
+    },
+    {
+      "key": "accounts",
+      "title": "Account and order history",
+      "category": "Account",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Guest orders link to an account with the same email address.",
+      "tags": ["account", "login", "history"],
+      "body": "Orders placed as a guest are linked automatically when you create an account with the same email address.\n\nPassword resets are sent to the account email and expire after 60 minutes.\n\nWe cannot change the email address on a past order. We can resend the confirmation to a different address once the order number and billing postcode have been verified."
+    },
+    {
+      "key": "wholesale",
+      "title": "Wholesale and guiding service accounts",
+      "category": "Business",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Trade pricing for guides and outfitters, with a 20 unit minimum.",
+      "tags": ["wholesale", "trade", "b2b"],
+      "body": "Certified guides, outdoor schools and rental outfitters qualify for trade pricing at 30 to 40 percent below retail, with a 20 unit opening order.\n\nApplications need a business registration number and proof of certification. Approval takes 2 business days.\n\nTrade accounts are invoiced on 30 day terms and ship free at any order value."
+    },
+    {
+      "key": "escalation",
+      "title": "When to escalate to a human",
+      "category": "Internal",
+      "status": "published",
+      "visibility": "internal",
+      "summary": "Refund disputes over 300 dollars, safety issues, and any legal language.",
+      "tags": ["internal", "escalation", "policy"],
+      "body": "Escalate to a supervisor straight away for a refund dispute over 300 dollars, any report of injury or gear failure during use, any mention of legal action or a chargeback, wholesale contract terms, and any request to speak to a manager.\n\nDo not offer goodwill credit over 50 dollars without supervisor approval.\n\nFor a safety report, collect the batch code from the care label of the item before closing the conversation."
+    },
+    {
+      "key": "goodwill",
+      "title": "Goodwill and compensation limits",
+      "category": "Internal",
+      "status": "published",
+      "visibility": "internal",
+      "summary": "Up to 50 dollars at agent discretion. Always record the reason.",
+      "tags": ["internal", "goodwill", "credit"],
+      "body": "Agents may issue up to 50 dollars in store credit without approval, to resolve a service failure such as a missed delivery date, a repeated error, or a long wait.\n\nAnything above 50 dollars, and any cash refund not covered by the returns policy, needs supervisor approval.\n\nAlways record the reason on the ticket. Repeat goodwill to the same customer within 90 days needs approval whatever the amount."
+    },
+    {
+      "key": "backorder",
+      "title": "Backorders and restocks",
+      "category": "Product",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Backorders are charged at dispatch, and restock alerts go by email.",
+      "tags": ["stock", "backorder", "restock"],
+      "body": "Backordered items are not charged until they ship. The date shown at checkout comes from the supplier and can move.\n\nYou can cancel a backorder at any time before it ships, at no cost.\n\nRestock alerts are sent by email only, once, when the item comes back into stock. They do not reserve any inventory."
+    },
+    {
+      "key": "care",
+      "title": "Caring for technical fabrics",
+      "category": "Product",
+      "status": "published",
+      "visibility": "public",
+      "summary": "Wash waterproofs with technical detergent, then tumble dry to reactivate the coating.",
+      "tags": ["care", "washing", "waterproof"],
+      "body": "Wash waterproof shells with a technical detergent, never with regular detergent or fabric softener, because both clog the membrane.\n\nTumble dry on low for 20 minutes after washing, to reactivate the water repellent coating. If water stops beading after that, reproof it with a wash in treatment.\n\nDown sleeping bags should be stored uncompressed in a large cotton sack. Storing a down bag compressed permanently reduces its loft, and that is not covered by the warranty."
+    },
+    {
+      "key": "gift-cards",
+      "title": "Gift cards",
+      "category": "Orders",
+      "status": "draft",
+      "visibility": "public",
+      "summary": "A draft. Digital gift cards launch next quarter.",
+      "tags": ["gift-card"],
+      "body": "Digital gift cards are delivered by email within 15 minutes of purchase and never expire.\n\nThey can be combined with promotions, and cannot be refunded for cash except where the law requires it.\n\nThis article is a draft, pending the gift card launch."
+    }
+  ],
+  "macros": [
+    { "name": "Return started", "tags": ["returns"], "body": "I have started that return for you. A prepaid label will reach you by email in a few minutes, and once the parcel arrives at our warehouse the refund lands within 5 business days." },
+    { "name": "Ask for the order number", "tags": ["orders"], "body": "Happy to look into that. Could you send me the order number. It starts with MO and it is at the top of your confirmation email." },
+    { "name": "Shipping delay apology", "tags": ["shipping"], "body": "I am sorry, that is later than we promised. The carrier is showing a delay at their sorting facility. I have flagged the parcel, and if it does not move in the next 48 hours I will send a replacement at no cost." },
+    { "name": "Warranty claim opened", "tags": ["warranty"], "body": "Thanks for the photos. That is a manufacturing defect and it is covered. I have opened a warranty claim, the replacement ships today, and there is nothing to send back." },
+    { "name": "Sizing guidance", "tags": ["sizing"], "body": "For boots, go a half size up from your street shoe. If you are between sizes, size up. Exchanges are free both ways within 60 days, so it is low risk to try one." },
+    { "name": "Escalating to a supervisor", "tags": ["escalation"], "body": "I want to get this right rather than guess, so I am bringing in a supervisor. They will pick this up within the hour, and you will not need to repeat anything." }
+  ],
+  "slaPolicies": [
+    { "name": "Urgent, 15 minutes", "priorities": ["urgent"], "firstResponseMinutes": 15, "resolutionMinutes": 240, "isActive": true },
+    { "name": "High, 1 hour", "priorities": ["high"], "firstResponseMinutes": 60, "resolutionMinutes": 480, "isActive": true },
+    { "name": "Standard, 4 hours", "priorities": ["medium", "low"], "firstResponseMinutes": 240, "resolutionMinutes": 2880, "isActive": true }
+  ],
+  "routingRules": [
+    { "name": "Damaged or broken goes urgent", "orderIndex": 0, "isActive": true, "conditions": { "any_of": ["damaged", "broken", "cracked", "arrived smashed"] }, "actions": { "priority": "urgent", "category": "Damaged", "add_tags": ["damage"] } },
+    { "name": "Refund language raises priority", "orderIndex": 1, "isActive": true, "conditions": { "any_of": ["refund", "chargeback", "money back"] }, "actions": { "priority": "high", "category": "Returns", "add_tags": ["refund"] } },
+    { "name": "Wholesale enquiries to the trade queue", "orderIndex": 2, "isActive": true, "conditions": { "any_of": ["wholesale", "trade account", "bulk order"] }, "actions": { "priority": "high", "category": "Wholesale", "add_tags": ["b2b"] } },
+    { "name": "Instagram messages are usually pre sales", "orderIndex": 3, "isActive": true, "conditions": { "channel": "instagram" }, "actions": { "category": "Pre-sales", "add_tags": ["social"] } }
+  ],
+  "conversations": [
+    {
+      "customer": "c1",
+      "channel": "whatsapp",
+      "subject": "Rain shell delaminated after four trips",
+      "status": "escalated",
+      "assignee": "agent1",
+      "priority": "high",
+      "category": "Warranty",
+      "tags": ["warranty", "vip"],
+      "startedHoursAgo": 5,
+      "messages": [
+        { "author": "customer", "hoursAgo": 5, "body": "The Ridgeline shell I bought in March has started delaminating along both shoulder seams. I have only had it out four times. Order MO-48221." },
+        { "author": "ai", "hoursAgo": 4.9, "confidence": 0.82, "cites": ["warranty"], "body": "That is covered. Seam separation on a shell is a manufacturing defect, and shells carry a 2 year warranty on that. Could you send photos of both shoulder seams. I will open the claim and get a replacement moving, and there is nothing to send back first." },
+        { "author": "customer", "hoursAgo": 4.2, "body": "Photos attached. I guide professionally so I need this sorted before Saturday, I have clients booked." },
+        { "author": "system", "hoursAgo": 4.1, "private": true, "body": "Escalated to a human agent. Commercial use, guiding client with a hard deadline." },
+        { "author": "agent", "hoursAgo": 3.6, "name": "Marcus Oyelaran", "body": "Elena, Marcus here. Those seams are clearly defective, so the claim is approved. I have put a replacement on express so it reaches you Thursday, ahead of Saturday. Nothing to return." }
+      ]
+    },
+    {
+      "customer": "c2",
+      "channel": "whatsapp",
+      "subject": "Where is order MO-49110",
+      "status": "resolved",
+      "assignee": "agent2",
+      "priority": "medium",
+      "category": "Shipping",
+      "tags": ["tracking"],
+      "startedHoursAgo": 27,
+      "messages": [
+        { "author": "customer", "hoursAgo": 27, "body": "Hi, I ordered on Monday and the tracking has not moved since Tuesday. MO-49110" },
+        { "author": "ai", "hoursAgo": 26.9, "confidence": 0.88, "cites": ["tracking"], "body": "Carrier scans can lag by about 24 hours, so a quiet tracking page early on is normal. Yours is past that though. If it has not moved for 3 business days we treat it as delayed and send a replacement at no cost, and I have flagged it for that." },
+        { "author": "customer", "hoursAgo": 26.4, "body": "It just updated, it is out for delivery. Thanks." },
+        { "author": "ai", "hoursAgo": 26.3, "confidence": 0.79, "body": "Good news. I will leave the flag on until it is scanned as delivered, just in case." }
+      ]
+    },
+    {
+      "customer": "c3",
+      "channel": "instagram",
+      "subject": "Does the Alpine 45 fit a short torso",
+      "status": "open",
+      "assignee": null,
+      "priority": "low",
+      "category": "Pre-sales",
+      "tags": ["social", "sizing"],
+      "startedHoursAgo": 2,
+      "messages": [
+        { "author": "customer", "hoursAgo": 2, "body": "hey, love the alpine 45 but im 5ft 2, will it swallow me" },
+        { "author": "ai", "hoursAgo": 1.9, "confidence": 0.74, "cites": ["sizing"], "body": "Height matters less than torso length here. Measure from the bump at the base of your neck to the top of your hip bones. Under 16 inches is our Small, which is almost certainly what you want. Fit exchanges are free both ways within 60 days if it is not right." }
+      ]
+    },
+    {
+      "customer": "c4",
+      "channel": "sms",
+      "subject": "Wrong size boots delivered",
+      "status": "open",
+      "assignee": "agent3",
+      "priority": "medium",
+      "category": "Returns",
+      "tags": ["exchange"],
+      "startedHoursAgo": 9,
+      "messages": [
+        { "author": "customer", "hoursAgo": 9, "body": "I ordered a 10.5, the box says 10.5 but the boots inside are 9.5. MO-49004" },
+        { "author": "ai", "hoursAgo": 8.9, "confidence": 0.71, "cites": ["returns", "damaged"], "body": "That is our packing error, so it costs you nothing. I can ship the correct 10.5 today with a prepaid label in the box for the wrong pair, and you do not need to send them back first." },
+        { "author": "customer", "hoursAgo": 8.5, "body": "Perfect, please do that" },
+        { "author": "agent", "hoursAgo": 8.1, "name": "Tomas Lindqvist", "body": "Done, the 10.5 is on its way and arrives Wednesday. The label is in the box. Sorry for the mix up." }
+      ]
+    },
+    {
+      "customer": "c5",
+      "channel": "email",
+      "subject": "Trade account for an outdoor school",
+      "status": "open",
+      "assignee": "sup",
+      "priority": "high",
+      "category": "Wholesale",
+      "tags": ["b2b"],
+      "startedHoursAgo": 20,
+      "messages": [
+        { "author": "customer", "hoursAgo": 20, "body": "We run a certified outdoor school with about 200 students a season and currently buy retail. I would like to know what a trade account involves, and whether there is a minimum." },
+        { "author": "ai", "hoursAgo": 19.9, "confidence": 0.86, "cites": ["wholesale"], "body": "Outdoor schools qualify. Trade pricing runs 30 to 40 percent below retail with a 20 unit opening order, 30 day invoicing and free shipping at any value. We need your business registration number and proof of certification, and approval takes two business days." },
+        { "author": "system", "hoursAgo": 19.8, "private": true, "body": "Escalated to a human agent. Wholesale contract terms." },
+        { "author": "agent", "hoursAgo": 18.2, "name": "Priya Raman", "body": "Maria, I have attached the trade application. Given your volume I can also set up a seasonal pre order, so your spring kit is reserved before the rush. Worth a 20 minute call this week." }
+      ]
+    },
+    {
+      "customer": "c6",
+      "channel": "web",
+      "subject": "Can I still return something bought 8 weeks ago",
+      "status": "resolved",
+      "assignee": null,
+      "priority": "low",
+      "category": "Returns",
+      "tags": ["returns"],
+      "startedHoursAgo": 50,
+      "messages": [
+        { "author": "customer", "hoursAgo": 50, "body": "I bought a sleeping bag about 8 weeks ago, never used it, and it is still in the bag. I would like to return it." },
+        { "author": "ai", "hoursAgo": 49.9, "confidence": 0.91, "cites": ["returns"], "body": "The refund window is 60 days from delivery, so 8 weeks is just inside it if it was delivered promptly. Unused and in original packaging is exactly what qualifies. Send me the order number and I will start it. Return shipping is 7.95 dollars, taken off the refund." },
+        { "author": "customer", "hoursAgo": 49.5, "body": "MO-47882. Thanks, that was easier than expected." }
+      ]
+    },
+    {
+      "customer": "c7",
+      "channel": "whatsapp",
+      "subject": "Bulk order for a rental fleet",
+      "status": "pending",
+      "assignee": "sup",
+      "priority": "high",
+      "category": "Wholesale",
+      "tags": ["b2b"],
+      "startedHoursAgo": 72,
+      "messages": [
+        { "author": "customer", "hoursAgo": 72, "body": "We rent gear at a resort and need 40 sleeping bags before the season. I wanted to ask about trade pricing." },
+        { "author": "agent", "hoursAgo": 70, "name": "Priya Raman", "body": "40 units clears our minimum comfortably. I have sent trade pricing to your email. At that volume it is 38 percent off retail, invoiced on 30 day terms, with free freight. Let me know the model split and I will confirm stock." }
+      ]
+    },
+    {
+      "customer": "c8",
+      "channel": "instagram",
+      "subject": "Is the winter sale on the down parka",
+      "status": "resolved",
+      "assignee": "agent2",
+      "priority": "low",
+      "category": "Pre-sales",
+      "tags": ["social"],
+      "startedHoursAgo": 30,
+      "messages": [
+        { "author": "customer", "hoursAgo": 30, "body": "does the sale include the summit down parka or not" },
+        { "author": "agent", "hoursAgo": 29.4, "name": "Sofia Institoris", "body": "It does, 25 percent off through Sunday, and all sizes are still in stock. Worth knowing that we price match authorised retailers for 14 days after purchase too, so you are covered if it drops further." }
+      ]
+    },
+    {
+      "customer": "c9",
+      "channel": "email",
+      "subject": "Headlamp died after three months",
+      "status": "open",
+      "assignee": "agent1",
+      "priority": "medium",
+      "category": "Warranty",
+      "tags": ["warranty"],
+      "startedHoursAgo": 14,
+      "messages": [
+        { "author": "customer", "hoursAgo": 14, "body": "The Trailfire headlamp I bought in October has stopped charging entirely. I have tried a new cable and a new outlet, with no change. Order MO-46012." },
+        { "author": "ai", "hoursAgo": 13.9, "confidence": 0.83, "cites": ["warranty"], "body": "Electronics carry a 12 month warranty, so an October purchase is well inside it. A dead charging circuit is a covered defect. I have noted the order, and an agent will confirm the replacement shortly." }
+      ]
+    },
+    {
+      "customer": "c10",
+      "channel": "voice",
+      "subject": "Call about an expedition kit list",
+      "status": "resolved",
+      "assignee": "agent3",
+      "priority": "medium",
+      "category": "Pre-sales",
+      "tags": ["call"],
+      "startedHoursAgo": 6,
+      "messages": [
+        { "author": "system", "hoursAgo": 6, "private": true, "body": "Inbound call, 11 minutes 42 seconds. Assisted by Tap AI, with 6 suggestions surfaced and 4 used." },
+        { "author": "agent", "hoursAgo": 5.8, "name": "Tomas Lindqvist", "body": "Call summary. Camille is outfitting a 12 person expedition for April. I quoted trade pricing, which she qualifies for through Boucher Expeditions, confirmed the minus 20 bags are in stock, and flagged that down bags have to ship uncompressed. Sending a kit list today." }
+      ]
+    },
+    {
+      "customer": "c11",
+      "channel": "web",
+      "subject": "Price match request",
+      "status": "open",
+      "assignee": null,
+      "priority": "medium",
+      "category": "Orders",
+      "tags": ["price-match"],
+      "startedHoursAgo": 1,
+      "messages": [
+        { "author": "customer", "hoursAgo": 1, "body": "I bought the Alpine 45 last week and it is now 40 dollars cheaper at another shop. I would like you to match it." },
+        { "author": "ai", "hoursAgo": 0.95, "confidence": 0.87, "cites": ["price-match"], "body": "Yes, as long as it is an authorised retailer with the identical item in stock. We refund the difference within 14 days of purchase. Send me the listing link and your order number and I will process it. We cannot match marketplace or auction sellers." }
+      ]
+    },
+    {
+      "customer": "c12",
+      "channel": "email",
+      "subject": "Tent poles snapped in moderate wind",
+      "status": "escalated",
+      "assignee": "sup",
+      "priority": "urgent",
+      "category": "Damaged",
+      "tags": ["damage", "safety"],
+      "startedHoursAgo": 3,
+      "messages": [
+        { "author": "customer", "hoursAgo": 3, "body": "Two pole sections on the Basecamp 4 snapped in maybe 30mph wind with three people inside. Nobody was hurt but it could have gone badly. This feels like a safety issue rather than wear." },
+        { "author": "system", "hoursAgo": 2.9, "private": true, "body": "Escalated to a human agent. Reported gear failure during use with people inside." },
+        { "author": "agent", "hoursAgo": 2.4, "name": "Priya Raman", "body": "Hana, thank you for reporting this, and I am glad everyone is alright. Poles are covered for life and a failure at 30mph is not normal. Before anything else, could you send the batch code from the care label inside the inner door. I need it to check whether this is a batch issue affecting other customers. The replacement is going out today either way." }
+      ]
+    }
+  ],
+  "tapSessions": [
+    {
+      "customerLabel": "Camille Boucher, +1 555 0149",
+      "status": "ended",
+      "startedHoursAgo": 6,
+      "durationMinutes": 12,
+      "summary": "Expedition kit for 12 people in April. Qualifies for trade pricing through Boucher Expeditions. The minus 20 bags are in stock. Flagged that down has to ship uncompressed. A kit list is owed today.",
+      "transcript": [
+        { "speaker": "customer", "text": "Hi, I am putting together kit for a twelve person expedition in April and I want to check a few things before I order." },
+        { "speaker": "agent", "text": "Of course, happy to go through it. Tell me what is on the list." },
+        { "speaker": "customer", "text": "Mainly sleeping bags rated to minus twenty, and I need to know if there is any trade pricing since we are a guiding outfit." },
+        { "speaker": "agent", "text": "There is. Let me check what you would qualify for." },
+        { "speaker": "customer", "text": "One more thing, last time we ordered down bags they arrived jammed into tiny stuff sacks and two of them never fully lofted again." }
+      ],
+      "suggestions": [
+        { "kind": "answer", "text": "Guiding outfits qualify for trade pricing at 30 to 40 percent below retail, with a 20 unit minimum.", "confidence": 0.88, "cites": ["wholesale"] },
+        { "kind": "action", "text": "Confirm Boucher Expeditions has a trade account before quoting a specific percentage.", "confidence": 0.72, "cites": ["wholesale"] },
+        { "kind": "warning", "text": "Down stored compressed loses loft permanently and that is not covered by the warranty. Say so now, not after.", "confidence": 0.84, "cites": ["care", "warranty"] },
+        { "kind": "answer", "text": "Down bags should ship and be stored uncompressed in a large cotton sack.", "confidence": 0.81, "cites": ["care"] },
+        { "kind": "question", "text": "Ask for the April date, because 12 units of one model may need a supplier lead time.", "confidence": 0.66, "cites": ["backorder"] },
+        { "kind": "action", "text": "Offer 30 day invoicing and free freight, both standard on trade accounts.", "confidence": 0.77, "cites": ["wholesale"] }
+      ]
+    }
+  ],
+  "historicalTickets": {
+    "$comment": "Parameters for the filler tickets that give the analytics charts 90 days of history. Generated the same way by the backend seed and by the frontend demo dataset.",
+    "days": 90,
+    "perDayMin": 2,
+    "perDayMax": 8,
+    "resolveRate": 0.86,
+    "aiHandledRate": 0.62,
+    "ratedRate": 0.45,
+    "subjects": [
+      "Return request for an unused jacket",
+      "Order has not been delivered yet",
+      "Exchange for a larger size",
+      "Question about the waterproof rating",
+      "Refund not received",
+      "Damaged box on arrival",
+      "Which pack for a four day trip",
+      "Discount code is not applying",
+      "Backorder date moved again",
+      "Warranty claim on a zip",
+      "Change of shipping address",
+      "Cancel an order placed today",
+      "Duplicate charge on a card",
+      "Restock alert never arrived",
+      "Boot sizing between half sizes",
+      "Missing item from a multi pack",
+      "Care instructions for a down bag",
+      "International shipping to the EU",
+      "Gift receipt request",
+      "Price match on a competitor sale"
+    ],
+    "categories": ["Orders", "Returns", "Shipping", "Warranty", "Pre-sales", "Damaged", "Account"],
+    "channels": ["web", "email", "whatsapp", "instagram", "sms", "voice"],
+    "channelWeights": [30, 26, 18, 10, 9, 7],
+    "priorities": ["low", "medium", "high", "urgent"],
+    "priorityWeights": [22, 48, 22, 8]
+  }
+}

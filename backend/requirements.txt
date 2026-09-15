@@ -1,0 +1,36 @@
+# Unified Customer Service Platform, backend dependencies.
+#
+# Deliberately small. The platform runs on SQLite with no external services.
+# PostgreSQL is optional, so install asyncpg and point DATABASE_URL at it.
+#
+# Pinned exactly so a build is reproducible. Check them with
+# `pip-audit -r requirements.txt` before a release, and `npm audit` for the
+# frontend. Both are wired into `npm run audit`.
+
+# Web framework
+fastapi==0.141.1
+uvicorn[standard]==0.52.4
+python-multipart==0.0.32
+
+# Database, SQLite by default through aiosqlite
+sqlalchemy==2.0.52
+aiosqlite==0.22.1
+
+# Validation / settings
+pydantic[email]==2.13.5
+pydantic-settings==2.15.0
+
+# Passwords and tokens use only the standard library, scrypt and hmac, so
+# there is no bcrypt or PyJWT build step to fight with on any platform.
+#
+# cryptography is here for one job, encrypting the provider keys and channel
+# credentials the platform stores for you, which have to be readable again and
+# so cannot be hashed. It ships prebuilt wheels everywhere, and if it is
+# unusable on your host the platform still runs and says so at startup.
+cryptography==50.0.1
+
+# Outbound HTTP, the only client used to reach LLM providers and channel APIs
+httpx==0.28.1
+
+# Config
+python-dotenv==1.2.3
